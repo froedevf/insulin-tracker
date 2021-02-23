@@ -12,12 +12,12 @@ def index():
     userName = request.args.get("n")
     item = request.args.get("i")
     reset = request.args.get("r")
-    if reset==1:
+    if reset == 1:
         return reset( userName, item )
     else:
-        return activate_or_age( userName, item )
+        return activate_or_age( userName, item, reset )
     
-def activate_or_age( userName, item ):
+def activate_or_age( userName, item, reset ):
     ''' if a vial is already activated, return the age, otherwise activate and return 0 '''
 
     # Validate/Find the username
@@ -49,7 +49,7 @@ def activate_or_age( userName, item ):
         if is_good:
             return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts )
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts, reset=reset )
         
 
 def reset( userName, item ):
