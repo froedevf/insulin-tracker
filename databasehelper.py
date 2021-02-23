@@ -20,11 +20,11 @@ def queryUserId(userName=''):
         
 	# execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT * from users where userName="{0}"'.format(userName))
+        cur.execute('SELECT user_id from users where name="{0}"'.format(userName))
 
         # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
+        user_id = cur.fetchone()
+        return user_id
        
 	# close the communication with the PostgreSQL
         cur.close()
