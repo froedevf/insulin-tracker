@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import psycopg2
 import os
-from confighelper import config
 
 def query( sql ):
     """ Connect to the PostgreSQL database server """
@@ -29,6 +28,32 @@ def query( sql ):
             conn.close()
             print('Database connection closed.')
 
+def insertRow( sql ):
+    """ Insert data into table """
+    conn = None
+    try:
+        # connect to the PostgreSQL server
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+		
+        # create a cursor
+        cur = conn.cursor()
+        
+        # execute a statement
+        cur.execute( sql )
+        cur.commit()
+        
+        cur.close()
+       
+        # close the communication with the PostgreSQL
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print('Database connection closed.')
+    
 def queryUserId(userName=''):
     return query("SELECT id from users where name='{0}'".format(userName))
 
