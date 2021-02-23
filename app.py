@@ -12,7 +12,7 @@ def index():
     userName = request.args.get("n")
     item = request.args.get("i")
     reset = request.args.get("r")
-    if reset == 1:
+    if reset == "1":
         return reset( userName, item )
     else:
         return activate_or_age( userName, item, reset )
