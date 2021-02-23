@@ -3,6 +3,8 @@ import psycopg2
 from databasehelper import executeSql, query, queryUserId
 import datetime as dt
 
+fresh_window = dt.timedelta(seconds=28)
+
 app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def index():
@@ -38,11 +40,12 @@ def activate_or_age( userName, item ):
         sql = "SELECT counter_start FROM vials WHERE user_id={0} and id={1}".format(userId, item)
         act_ts = query(sql)
         age = act_ts - ts
-        daysleft = 28 - age.days
-        if dt.timedelta(days=28) > age:
-            return render_template("good.html", userName=userName, item=item, daysleft=daysleft )
+        is_good = fresh_window > age
+        timeleft = fresh_window - age
+        if is_good:
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleft )
         else:
-            return render_template("stale.html", userName=userName, item=item, daysleft=-daysleft )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleft )
         
 
 def reset( userName, item ):
