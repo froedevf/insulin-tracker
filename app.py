@@ -3,8 +3,7 @@ import psycopg2
 from databasehelper import executeSql, query, queryUserId
 import datetime as dt
 
-fresh_window = dt.timedelta(days=30)
-
+fresh_window = dt.timedelta(seconds=30)
 app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def index():
@@ -12,6 +11,7 @@ def index():
     userName = request.args.get("n")
     item = request.args.get("i")
     resetreq = request.args.get("r")
+
     if resetreq == "1":
         return reset( userName, item )
     else:
@@ -45,7 +45,7 @@ def activate_or_age( userName, item ):
         if fresh_window < dt.timedelta(minutes = 1): # for testing only, fresh window is in seconds
             timeleftstr = "{0} seconds".format( timeleft.total_seconds() )
         else:
-            timeleftstr = "{0} days".format( timeleft.days() )
+            timeleftstr = "{0} days".format( timeleft.days )
         if is_good:
             return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts )
         else:
