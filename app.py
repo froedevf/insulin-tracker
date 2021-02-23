@@ -15,12 +15,12 @@ def index():
 	# Overwrite the count
 	f = open("count.txt", "w")
 	f.write(str(count))
-	f.close()
+    f.close()
 
     userName = 'davekatz'
     userId = getUserId(userName)
 
-	return render_template("index.html", count=count, userId=userId, userName=userName)
+    return render_template("index.html", count=count, userId=userId, userName=userName)
 
 def getUserId(userName='davekatz'):
     # Connect to postgresql and get the user id
