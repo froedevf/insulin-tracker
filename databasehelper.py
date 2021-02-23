@@ -3,30 +3,24 @@ import psycopg2
 import os
 from confighelper import config
 
-def queryUserId(userName=''):
+def query( sql ):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
-        # read connection parameters
-        params = config()
-
         # connect to the PostgreSQL server
-        print('Connecting to the PostgreSQL database...')
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 		
         # create a cursor
         cur = conn.cursor()
         
-	# execute a statement
-        print('PostgreSQL database version:')
-        cur.execute("SELECT id from users where name='{0}'".format(userName))
+        # execute a statement
+        cur.execute( sql )
 
-        # display the PostgreSQL database server version
         user_id = cur.fetchone()
         return user_id[0]
        
-	# close the communication with the PostgreSQL
+        # close the communication with the PostgreSQL
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -35,6 +29,8 @@ def queryUserId(userName=''):
             conn.close()
             print('Database connection closed.')
 
+def queryUserId(userName=''):
+    return query("SELECT id from users where name='{0}'".format(userName))
 
 if __name__ == '__main__':
     connect()

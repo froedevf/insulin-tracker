@@ -18,10 +18,7 @@
 </style>
 
 <div>
-    <h1>Welcome!</h1><br>
-    <p>This site has been visited [{{ count }}] times.</p>
-	<p>User Name [{{ userName }}] with ID [{{ userId }}] </p>
-	<p>Request userName [{{ userName }}] </p>
-	<p>Request item [{{ item }}] </p>
-	
+    <h1>STOP!  Insulin Vial Stale!</h1><br>
+    <p>Item {{ item }} for {{ userName }} </p>
+	<p>was activated on {{ ts }}, so stale by {{ daysleft }} days.</p>
 </div>

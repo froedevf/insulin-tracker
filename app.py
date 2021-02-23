@@ -1,29 +1,27 @@
 from flask import Flask, render_template, request
 import psycopg2
 import databasehelper
+import datetime as dt
 
 app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def index():
-	# Load current count
-    f = open("count.txt", "r")
-    count = int(f.read())
-    f.close()
-	
-	# Increment the count
-    count += 1
+    # Read input params
+    userName = request.args.get("n")
+    item = request.args.get("i")
+    
+    # Validate/Find the username
+    try:
+        userId = databasehelper.queryUserId(userName=userName)
+    except:
+        return render_template("error.html", msg="UserName {0} not found, please register!".format(userName))
 
-	# Overwrite the count
-    f = open("count.txt", "w")
-    f.write(str(count))
-    f.close()
-
-    userName = 'davekatz'
-    userId = databasehelper.queryUserId(userName=userName)
-
-    userNameRequested = request.args.get("n")
-    itemRequested = request.args.get("i")
-    return render_template("index.html", count=count, userId=userId, userName=userName, userNameRequested=userNameRequested, itemRequested=itemRequested)
+    # Find out if vial is already activated
+    ts = dt.now()
+    
+    res = activate_or_age( ts, userId, item )
+    
+    return render_template("index.html", userId=userId, userName=userName, item=item)
     
 if __name__ == "__main__":
 	app.run(debug=True)
