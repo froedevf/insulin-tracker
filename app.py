@@ -48,7 +48,7 @@ def activate_or_age( userName, item ):
 def reset( userName, item ):
     sql = "DELETE * FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
     databasehelper.execute(sql)
-    return render_template("Reset.html", userName=userName, item=item, dt.datetime.now() )
+    return render_template("Reset.html", userName=userName, item=item, ts=dt.datetime.now() )
     
 if __name__ == "__main__":
 	app.run(debug=True)
