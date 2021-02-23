@@ -54,7 +54,7 @@ def activate_or_age( userName, item ):
 
 def reset( userName, item ):
     userId = queryUserId(userName=userName)
-    sql = "DELETE * FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
+    sql = "DELETE FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
     executeSql(sql)
     return render_template("reset.html", userName=userName, item=item, ts=dt.datetime.now() )
     
