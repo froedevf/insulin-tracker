@@ -15,7 +15,7 @@ def executeSql( sql ):
         
         # execute a statement
         cur.execute( sql )
-        cur.commit()
+        conn.commit()
         
         cur.close()
        
