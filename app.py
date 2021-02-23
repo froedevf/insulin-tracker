@@ -39,13 +39,17 @@ def activate_or_age( userName, item ):
         # Check!
         sql = "SELECT counter_start FROM vials WHERE user_id={0} and id={1}".format(userId, item)
         act_ts = query(sql)
-        age = act_ts - ts
+        age = ts - act_ts
         is_good = fresh_window > age
         timeleft = fresh_window - age
-        if is_good:
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleft, ts=act_ts )
+        if fresh_window < dt.timedelta(minutes = 1): # for testing only, fresh window is in seconds
+            timeleftstr = "{0} seconds".format( timeleft.total_seconds )
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleft, ts=act_ts )
+            timeleftstr = "{0} days".format( timeleft.total_days )
+        if is_good:
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts )
+        else:
+            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleftstr, ts=act_ts )
         
 
 def reset( userName, item ):
