@@ -26,7 +26,6 @@ def executeSql( sql ):
     finally:
         if conn is not None:
             conn.close()
-            print('Database connection closed.')
 
 def query( sql ):
     """ Connect to the PostgreSQL database server """
@@ -52,7 +51,6 @@ def query( sql ):
     finally:
         if conn is not None:
             conn.close()
-            print('Database connection closed.')
 
 def queryUserId(userName=''):
     return query("SELECT id from users where name='{0}'".format(userName))

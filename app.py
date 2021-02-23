@@ -43,9 +43,9 @@ def activate_or_age( userName, item ):
         is_good = fresh_window > age
         timeleft = fresh_window - age
         if is_good:
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleft )
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleft, ts=act_ts )
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleft )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleft, ts=act_ts )
         
 
 def reset( userName, item ):
