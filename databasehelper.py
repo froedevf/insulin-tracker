@@ -24,7 +24,7 @@ def queryUserId(userName=''):
 
         # display the PostgreSQL database server version
         user_id = cur.fetchone()
-        return user_id
+        return user_id[0]
        
 	# close the communication with the PostgreSQL
         cur.close()
