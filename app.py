@@ -9,8 +9,11 @@ def index():
     # Read input params
     userName = request.args.get("n")
     item = request.args.get("i")
-    
-    return activate_or_age( userName, item )
+    reset = request.args.get("r")
+    if reset==1:
+        return reset( userName, item )
+    else:
+        return activate_or_age( userName, item )
     
 def activate_or_age( userName, item ):
     ''' if a vial is already activated, return the age, otherwise activate and return 0 '''
@@ -28,6 +31,7 @@ def activate_or_age( userName, item ):
     if itemCount==0:
         # Activate!
         sql = "INSERT INTO vials (id, user_id, counter_start, checks) values ({0},{1},{2},{3})".format( item, userId, ts, 0 )
+        databasehelper.execute(sql)
         return render_template("Activate.html", userName=userName, item=item, ts=ts )
     else:
         # Check!
@@ -40,7 +44,11 @@ def activate_or_age( userName, item ):
         else:
             return render_template("Stale.html", userName=userName, item=item, daysleft=-daysleft )
         
-        
+
+def reset( userName, item ):
+    sql = "DELETE * FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
+    databasehelper.execute(sql)
+    return render_template("Reset.html", userName=userName, item=item, dt.datetime.now() )
     
 if __name__ == "__main__":
 	app.run(debug=True)
