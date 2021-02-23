@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import psycopg2
-from config import config
+from confighelper import config
 
-def connect():
+def queryUserId(userName=''):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
@@ -18,7 +18,7 @@ def connect():
         
 	# execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
+        cur.execute('SELECT * from users where userName="{0}"'.format(userName))
 
         # display the PostgreSQL database server version
         db_version = cur.fetchone()
