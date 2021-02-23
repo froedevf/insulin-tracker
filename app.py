@@ -32,7 +32,7 @@ def activate_or_age( userName, item ):
         # Activate!
         sql = "INSERT INTO vials (id, user_id, counter_start, checks) values ({0},{1},{2},{3})".format( item, userId, ts, 0 )
         executeSql(sql)
-        return render_template("Activate.html", userName=userName, item=item, ts=ts )
+        return render_template("activate.html", userName=userName, item=item, ts=ts )
     else:
         # Check!
         sql = "SELECT counter_start FROM vials WHERE user_id={0} and id={1}".format(userId, item)
@@ -40,15 +40,15 @@ def activate_or_age( userName, item ):
         age = act_ts - ts
         daysleft = 28 - age.days()
         if dt.timedelta(days=28) > age:
-            return render_template("Good.html", userName=userName, item=item, daysleft=daysleft )
+            return render_template("good.html", userName=userName, item=item, daysleft=daysleft )
         else:
-            return render_template("Stale.html", userName=userName, item=item, daysleft=-daysleft )
+            return render_template("stale.html", userName=userName, item=item, daysleft=-daysleft )
         
 
 def reset( userName, item ):
     sql = "DELETE * FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
     executeSql(sql)
-    return render_template("Reset.html", userName=userName, item=item, ts=dt.datetime.now() )
+    return render_template("reset.html", userName=userName, item=item, ts=dt.datetime.now() )
     
 if __name__ == "__main__":
 	app.run(debug=True)
