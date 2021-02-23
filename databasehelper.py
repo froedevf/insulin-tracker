@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import psycopg2
+import os
 from confighelper import config
 
 def queryUserId(userName=''):
