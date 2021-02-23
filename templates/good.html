@@ -23,5 +23,13 @@
 	<p>was activated on {{ ts }}, so good for another {{ timeleft }}.</p>
 	<p></p>
 	<a href="https://insulin-tracker.herokuapp.com/?n={{userName}}&i={{item}}&r=1&">Reset this vial</a>
-
+	<script>
+		var g = new JustGage({
+			id: "gauge", 
+			value: 67, 
+			min: 0,
+			max: 100,
+			title: "Visitors"
+		}); 
+	</script>
 </div>

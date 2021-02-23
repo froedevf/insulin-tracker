@@ -3,7 +3,7 @@ import psycopg2
 from databasehelper import executeSql, query, queryUserId
 import datetime as dt
 
-fresh_window = dt.timedelta(seconds=28)
+fresh_window = dt.timedelta(days=30)
 
 app = Flask(__name__)
 @app.route("/", methods=['GET'])
