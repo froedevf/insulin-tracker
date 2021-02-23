@@ -49,7 +49,7 @@ def activate_or_age( userName, item ):
         if is_good:
             return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts )
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=-timeleftstr, ts=act_ts )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts )
         
 
 def reset( userName, item ):
