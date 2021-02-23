@@ -11,7 +11,8 @@ def queryUserId(userName=''):
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect(**params)
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 		
         # create a cursor
         cur = conn.cursor()
