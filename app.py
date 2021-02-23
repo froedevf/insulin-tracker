@@ -30,7 +30,7 @@ def activate_or_age( userName, item ):
     itemCount = query("select count(*) from vials where user_id={0} and id={1}".format(userId, item))
     if itemCount == 0:
         # Activate!
-        sql = "INSERT INTO vials (id, user_id, counter_start, checks) values ({0},{1},{2},{3})".format( item, userId, ts, 0 )
+        sql = "INSERT INTO vials (id, user_id, counter_start, checks) values ({0},{1},'{2}',{3})".format( item, userId, ts, 0 )
         executeSql(sql)
         return render_template("activate.html", userName=userName, item=item, ts=ts )
     else:
