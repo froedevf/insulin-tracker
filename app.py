@@ -12,7 +12,7 @@ def index():
     
     return activate_or_age( userName, item )
     
-def activate_or_age( userName, item )
+def activate_or_age( userName, item ):
     ''' if a vial is already activated, return the age, otherwise activate and return 0 '''
 
     # Validate/Find the username
