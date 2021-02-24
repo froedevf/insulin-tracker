@@ -44,14 +44,11 @@ def activate_or_age( userName, item ):
         if fresh_window < dt.timedelta(minutes = 1): # for testing only, fresh window is in seconds
             timeleftstr = "{0} seconds".format( timeleft.total_seconds() )
         else:
-            timeleftstr = "{0} days".format( timeleft.days )
+            timeleftstr = "{0} days".format( timeleft.days.round() )
         if is_good:
-            labels = ["January","February","March","April","May","June","July","August"]
-            values = [10,9,8,7,6,4,7,8]
-            colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"  ]
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts, set=zip(values, labels, colors) )
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M"))
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts, reset=reset )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M"), reset=reset )
         
 
 def reset( userName, item ):
