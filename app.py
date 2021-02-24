@@ -47,7 +47,9 @@ def activate_or_age( userName, item ):
         else:
             timeleftstr = "{0} days".format( timeleft.days )
         if is_good:
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts )
+            labels = ["January","February","March","April","May","June","July","August"]
+            values = [10,9,8,7,6,4,7,8]
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts, values=values, labels=labels )
         else:
             return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts, reset=reset )
         
@@ -57,6 +59,9 @@ def reset( userName, item ):
     sql = "DELETE FROM vials WHERE user_id='{0}' and id='{1}'".format(userId, item)
     executeSql(sql)
     return render_template("reset.html", userName=userName, item=item, ts=dt.datetime.now() )
-    
+
+
+if __name__ == "__main__":
+app.run(host='0.0.0.0', port=5001)
 if __name__ == "__main__":
 	app.run(debug=True)
