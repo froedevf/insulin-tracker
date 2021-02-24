@@ -46,9 +46,9 @@ def activate_or_age( userName, item ):
         else:
             timeleftstr = "{0} days".format( timeleft.days.round() )
         if is_good:
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M"))
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M EST"))
         else:
-            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M"), reset=reset )
+            return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M EST"), reset=reset )
         
 
 def reset( userName, item ):
