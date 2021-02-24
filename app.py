@@ -11,11 +11,6 @@ def index():
     userName = request.args.get("n")
     item = request.args.get("i")
     resetreq = request.args.get("r")
-    labels = ["January","February","March","April","May","June","July","August"]
-    values = [10,9,8,7,6,4,7,8]
-    colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"  ]
-    return render_template('chart.html', set=zip(values, labels, colors))
-    
     if resetreq == "1":
         return reset( userName, item )
     else:
