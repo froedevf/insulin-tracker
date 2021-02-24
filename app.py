@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Markup
 import psycopg2
 from databasehelper import executeSql, query, queryUserId
 import datetime as dt
