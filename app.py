@@ -49,7 +49,8 @@ def activate_or_age( userName, item ):
         if is_good:
             labels = ["January","February","March","April","May","June","July","August"]
             values = [10,9,8,7,6,4,7,8]
-            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts, values=values, labels=labels )
+            colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"  ]
+            return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts, set=zip(values, labels, colors) )
         else:
             return render_template("stale.html", userName=userName, item=item, timeexpired=timeleftstr, ts=act_ts, reset=reset )
         
