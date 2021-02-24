@@ -42,9 +42,9 @@ def activate_or_age( userName, item ):
         is_good = fresh_window > age
         timeleft = abs(fresh_window - age)
         if fresh_window < dt.timedelta(minutes = 1): # for testing only, fresh window is in seconds
-            timeleftstr = "{0:0} seconds".format( timeleft.total_seconds() )
+            timeleftstr = "{0:.2f} seconds".format( timeleft.total_seconds() )
         else:
-            timeleftstr = "{0} days".format( timeleft.days.round() )
+            timeleftstr = "{0:.2f} days".format( timeleft.days )
         if is_good:
             return render_template("good.html", userName=userName, item=item, timeleft=timeleftstr, ts=act_ts.strftime("%m/%d/%Y %H:%M %Z"))
         else:
