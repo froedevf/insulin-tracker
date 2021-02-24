@@ -1,4 +1,4 @@
-<link rel="preconnect" href="https://fonts.gstatic.com">
+<meta charset="utf-8"><link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 <style>
     * {
@@ -9,14 +9,16 @@
         margin-top: 50px;
     }
     h1 {
-        color: red;
-        font-size: 40pt;
+        color: black;
+        font-size: 80pt;
     }
     p {
-        font-size: 24pt;
+        font-size: 40pt;
     }
 </style>
-
+<head>
+</head>
+<body style="background-color:#93c47d" >
 <div>
     <h1>STOP!  Insulin Vial Stale!</h1><br>
     <p>Item {{ item }} for {{ userName }} </p>
@@ -24,3 +26,4 @@
 
 	<a href="https://insulin-tracker.herokuapp.com/?n={{userName}}&i={{item}}&r=1&">Reset this vial</a>
 </div>
+</body>

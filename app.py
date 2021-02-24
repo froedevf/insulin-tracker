@@ -40,7 +40,7 @@ def activate_or_age( userName, item ):
         act_ts = query(sql)
         age = ts - act_ts
         is_good = fresh_window > age
-        timeleft = fresh_window - age
+        timeleft = abs(fresh_window - age)
         if fresh_window < dt.timedelta(minutes = 1): # for testing only, fresh window is in seconds
             timeleftstr = "{0} seconds".format( timeleft.total_seconds() )
         else:
